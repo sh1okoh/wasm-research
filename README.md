@@ -1,4 +1,6 @@
 ## 実行方法
+cd ~/emsdk
+source ./emsdk_env.sh
 emcc target.c -o index.html WASM=1
 
 ## WABTの利用
