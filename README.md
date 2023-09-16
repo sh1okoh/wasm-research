@@ -1,7 +1,10 @@
 ## 実行方法
 cd ~/emsdk
 source ./emsdk_env.sh
-emcc target.c -o index.html WASM=1
+emcc target.c -o
+
+最適化レベルの調整
+The levels include: -O0 (no optimization), -O1, -O2, -Os, -Oz, -Og, and -O3.
 
 ## WABTの利用
 cd ~/wabt
