@@ -10,7 +10,7 @@
     call 8)
   (func (;1;) (type 1) (param i32) (result i32)
     (local i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32)
-    global.get 0
+    global.get 0  ;;
     local.set 1
     i32.const 32
     local.set 2
