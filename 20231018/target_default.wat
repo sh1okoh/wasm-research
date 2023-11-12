@@ -8,6 +8,7 @@
   (type (;6;) (func (param i32 i64 i32) (result i64)))
   (func (;0;) (type 3)
     call 8)
+  ;; fibonacci関数
   (func (;1;) (type 1) (param i32) (result i32)
     (local i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32)
     global.get 0  ;; グローバル変数を読み込んでスタックにプッシュ	[g0]
@@ -158,78 +159,80 @@
     local.set 33 ;; [L3,L3,L3,L3,L3,L3,L3,L3,L3,L3]		L33=t1
     local.get 33 ;; [t1,L3,L3,L3,L3,L3,L3,L3,L3,L3,L3]
     return)
+  ;; reverseNumber関数
   (func (;2;) (type 1) (param i32) (result i32)
     (local i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32)
-    global.get 0
-    local.set 1
-    i32.const 16
-    local.set 2
-    local.get 1
-    local.get 2
-    i32.sub
-    local.set 3
-    local.get 3
-    local.get 0
-    i32.store offset=12
-    i32.const 0
-    local.set 4
-    local.get 3
-    local.get 4
-    i32.store offset=8
+    global.get 0 ;; グローバル変数を読み込んでスタックにプッシュ	[g0]
+    local.set 1 ;; スタックの値をポップしてローカル変数1に保存	[]		L1=g0
+    i32.const 16 ;; 16をスタックにプッシュ	                  [16]
+    local.set 2 ;; スタックの値をポップしてローカル変数2に保存	[]		L2=16
+    local.get 1 ;; ローカル変数1をスタックにプッシュ [g0]
+    local.get 2 ;; ローカル変数2をスタックにプッシュ [L2, g0]
+    i32.sub     ;; g0 - L2 [g0 - L2]
+    local.set 3 ;; スタックの値をポップしてローカル変数3に保存 [] L3= g0 - L2
+    local.get 3 ;; ローカル変数3をスタックにプッシュ [L3]
+    local.get 0 ;; ローカル変数0をスタックにプッシュ          [(g0ではなく引数1?),L3]
+    i32.store offset=12 ;; スタックの先頭の値をポップして16番地に書く	[L3]			[12]= (g0ではなく引数1?)
+    i32.const 0 ;; 0をスタックにプッシュ   [0, L3]
+    local.set 4 ;; スタックの値をポップしてローカル変数4に保存 [L3]  L4=0
+    local.get 3 ;; ローカル変数3をスタックにプッシュ [L3, L3]
+    local.get 4 ;; ローカル変数4をスタックにプッシュ [0, L3, L3]
+    i32.store offset=8 ;; スタックの先頭の値をポップして8番地に書く [L3, L3] [8]=0
     block  ;; label = @1
       loop  ;; label = @2
-        local.get 3
-        i32.load offset=12
-        local.set 5
-        local.get 5
-        i32.eqz
-        br_if 1 (;@1;)
-        local.get 3
-        i32.load offset=8
-        local.set 6
-        i32.const 10
-        local.set 7
-        local.get 6
-        local.get 7
-        i32.mul
-        local.set 8
-        local.get 3
-        i32.load offset=12
-        local.set 9
-        i32.const 10
-        local.set 10
-        local.get 9
-        local.get 10
-        i32.rem_s
-        local.set 11
-        local.get 8
-        local.get 11
-        i32.add
-        local.set 12
-        local.get 3
-        local.get 12
-        i32.store offset=8
-        local.get 3
-        i32.load offset=12
-        local.set 13
-        i32.const 10
-        local.set 14
-        local.get 13
-        local.get 14
-        i32.div_s
-        local.set 15
-        local.get 3
-        local.get 15
-        i32.store offset=12
-        br 0 (;@2;)
+        local.get 3 ;; ローカル変数3をスタックにプッシュ [L3, L3, L3]
+        i32.load offset=12 ;; 12番地をスタックにプッシュ [(g0ではなく引数1?), L3, L3, L3]
+        local.set 5 ;; スタックの値をポップしてローカル変数5に保存 [L3, L3, L3] L5=(g0ではなく引数1?)
+        local.get 5 ;; ローカル変数5をスタックにプッシュ [L5, L3, L3, L3]
+        i32.eqz ;; スタックの先頭が0かどうか [L5 == 0(1or0), L3, L3, L3]
+        br_if 1 (;@1;) ;; スタックの値が非ゼロならTRUE→ブロックを抜ける [L3, L3, L3] 
+        local.get 3 ;; ローカル変数3をスタックにプッシュ [L3, L3, L3, L3]
+        i32.load offset=8 ;; 8番地をスタックにプッシュ [0, L3, L3, L3, L3]
+        local.set 6 ;; スタックの値をポップしてローカル変数6に保存 [L3, L3, L3, L3] L6=0
+        i32.const 10 ;; 10をスタックにプッシュ [10, L3, L3, L3, L3] 
+        local.set 7 ;; スタックの値をポップしてローカル変数7に保存 [L3, L3, L3, L3] L7=10
+        local.get 6 ;; ローカル変数6をスタックにプッシュ [0, L3, L3, L3, L3]
+        local.get 7 ;; ローカル変数7をスタックにプッシュ [10, 0, L3, L3, L3, L3]
+        i32.mul ;;  スタックの値の乗算 0*10 [10*0, L3, L3, L3, L3]
+        local.set 8 ;; スタックの値をポップしてローカル変数8に保存 [L3, L3, L3, L3] L8=10*0
+        local.get 3 ;; ローカル変数3をスタックにプッシュ [L3, L3, L3, L3, L3]
+        i32.load offset=12 ;; 12番地をスタックにプッシュ	[[12], L3, L3, L3, L3, L3]
+        local.set 9 ;; スタックの値をローカル変数9に保存 [L3, L3, L3, L3, L3] L9=[12]
+        i32.const 10 ;; 10をスタックにプッシュ [10, L3, L3, L3, L3, L3]
+        local.set 10 ;; スタックの値をローカル変数10に保存 [L3, L3, L3, L3, L3]
+        local.get 9 ;; ローカル変数9をスタックにプッシュ [[12], L3, L3, L3, L3, L3]
+        local.get 10 ;; ローカル変数10をスタックにプッシュ [10, [12], L3, L3, L3, L3, L3]
+        i32.rem_s ;; [12]%10 の余りを取得 [[12]%10, L3, L3, L3, L3, L3]
+        local.set 11 ;; スタックの値をローカル変数11に保存 [L3, L3, L3, L3, L3] L11=[12]%10
+        local.get 8 ;; ローカル変数8をスタックにプッシュ [L8(10*0), L3, L3, L3, L3, L3]
+        local.get 11 ;; ローカル変数11をスタックにプッシュ [L11([12]%10), L8(10*0), L3, L3, L3, L3, L3]
+        i32.add ;;  L8(10*0) + L11([12]%10) [L8(10*0) + L11([12]%10), L3, L3, L3, L3, L3]
+        local.set 12 ;; スタックの値をローカル変数12に保存 [L3, L3, L3, L3, L3] L12=L8(10*0) + L11([12]%10)
+        local.get 3 ;; ローカル変数3をスタックにプッシュ [L3, L3, L3, L3, L3, L3]
+        local.get 12 ;; ローカル変数12をスタックにプッシュ [L12(L8(10*0) + L11([12]%10)), L3, L3, L3, L3, L3, L3]
+        i32.store offset=8 ;; スタックの先頭の値をポップして8番地に書く [L3, L3, L3, L3, L3, L3] [8]=L12(L8(10*0) + L11([12]%10))
+        local.get 3 ;; ローカル変数3をスタックにプッシュ [L3, L3, L3, L3, L3, L3, L3]
+        i32.load offset=12 ;; 12番地をスタックにプッシュ [[12], L3, L3, L3, L3, L3, L3, L3]
+        local.set 13 ;; スタックの値をローカル変数13に保存 [L3, L3, L3, L3, L3, L3, L3] L13=[12]
+        i32.const 10 ;; 10をスタックにプッシュ [10, L3, L3, L3, L3, L3, L3, L3]
+        local.set 14 ;; スタックの値をローカル変数14に保存 [L3, L3, L3, L3, L3, L3, L3] L14=10
+        local.get 13 ;; ローカル変数13をスタックにプッシュ [[12], L3, L3, L3, L3, L3, L3, L3]
+        local.get 14 ;; ローカル変数14をスタックにプッシュ [10, [12], L3, L3, L3, L3, L3, L3]
+        i32.div_s ;; [12]/10 の商を取得 [[12]/10, L3, L3, L3, L3, L3, L3]
+        local.set 15 ;; スタックの値をローカル変数15に保存 [L3, L3, L3, L3, L3, L3, L3] L15=[12]/10
+        local.get 3 ;; ローカル変数3をスタックにプッシュ [L3, L3, L3, L3, L3, L3, L3, L3]
+        local.get 15 ;; ローカル変数15をスタックにプッシュ [[12]/10, L3, L3, L3, L3, L3, L3, L3, L3]
+        i32.store offset=12 ;; スタックの先頭の値をポップして12番地に書く [L3, L3, L3, L3, L3, L3, L3] [12]=[12]/10
+        br 0 (;@2;) ;; ブロック@2がLoopなので，continueの振舞いをする 
       end
-      unreachable
+      unreachable ;; ブロック@1が終了したら，ここに来る
     end
-    local.get 3
-    i32.load offset=8
-    local.set 16
-    local.get 16
-    return)
+    local.get 3 ;; ローカル変数3をスタックにプッシュ [L3, L3, L3]
+    i32.load offset=8 ;; 8番地をスタックにプッシュ [L12(L8(10*0) + L11([12]%10)), L3, L3, L3]
+    local.set 16 ;; スタックの値をローカル変数16に保存 [L3, L3, L3] L16=L12(L8(10*0) + L11([12]%10))
+    local.get 16 ;; ローカル変数16をスタックにプッシュ [L16(L12(L8(10*0) + L11([12]%10))), L3, L3]
+    return ;; ローカル変数16を返す)
+  ;; main関数
   (func (;3;) (type 0) (result i32)
     (local i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32)
     global.get 0
