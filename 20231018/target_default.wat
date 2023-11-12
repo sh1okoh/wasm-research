@@ -235,56 +235,56 @@
   ;; main関数
   (func (;3;) (type 0) (result i32)
     (local i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32 i32)
-    global.get 0
-    local.set 0
-    i32.const 16
-    local.set 1
-    local.get 0
-    local.get 1
-    i32.sub
-    local.set 2
-    local.get 2
-    global.set 0
-    i32.const 0
-    local.set 3
-    local.get 2
-    local.get 3
-    i32.store offset=12
-    i32.const 10
-    local.set 4
-    local.get 2
-    local.get 4
-    i32.store offset=8
-    local.get 2
-    i32.load offset=8
-    local.set 5
-    local.get 5
-    call 1
-    local.set 6
-    local.get 2
-    local.get 6
-    i32.store offset=4
-    local.get 2
-    i32.load offset=4
-    local.set 7
-    local.get 7
-    call 2
-    local.set 8
-    local.get 2
-    local.get 8
-    i32.store
-    local.get 2
-    i32.load
-    local.set 9
-    i32.const 16
-    local.set 10
-    local.get 2
-    local.get 10
-    i32.add
-    local.set 11
-    local.get 11
-    global.set 0
-    local.get 9
+    global.get 0 ;; グローバル変数を読み込んでスタックにプッシュ	[g0]
+    local.set 0 ;; スタックの値をポップしてローカル変数0に保存	[]		L0=g0
+    i32.const 16 ;; 16をスタックにプッシュ	                  [16]
+    local.set 1 ;; スタックの値をポップしてローカル変数1に保存	[]		L1=16
+    local.get 0 ;; ローカル変数0をスタックにプッシュ [g0]
+    local.get 1 ;; ローカル変数1をスタックにプッシュ [L1, g0]
+    i32.sub ;; g0 - L1 [g0 - L1]
+    local.set 2 ;; スタックの値をポップしてローカル変数2に保存 [] L2= g0 - L1
+    local.get 2 ;; ローカル変数2をスタックにプッシュ [L2]
+    global.set 0 ;; スタックの値をポップしてグローバル変数0に保存 [] g0=L2
+    i32.const 0 ;; 0をスタックにプッシュ   [0, L2]
+    local.set 3 ;; スタックの値をポップしてローカル変数3に保存 [L2]  L3=0
+    local.get 2 ;; ローカル変数2をスタックにプッシュ [L2, L2]
+    local.get 3 ;; ローカル変数3をスタックにプッシュ [0, L2, L2]
+    i32.store offset=12 ;; スタックの先頭の値をポップして12番地に書く	[L2, L2]			[12]=0
+    i32.const 10 ;; 10をスタックにプッシュ [10, L2, L2]
+    local.set 4 ;; スタックの値をポップしてローカル変数4に保存 [L2, L2]  L4=10
+    local.get 2 ;; ローカル変数2をスタックにプッシュ [L2, L2, L2]
+    local.get 4 ;; ローカル変数4をスタックにプッシュ [10, L2, L2, L2]
+    i32.store offset=8 ;; スタックの先頭の値をポップして8番地に書く [L2, L2, L2] [8]=10
+    local.get 2 ;; ローカル変数2をスタックにプッシュ [L2, L2, L2, L2]
+    i32.load offset=8 ;; 8番地をスタックにプッシュ [10, L2, L2, L2, L2]
+    local.set 5 ;; スタックの値をローカル変数5に保存 [L2, L2, L2, L2] L5=10
+    local.get 5 ;; ローカル変数5をスタックにプッシュ [L5(10), L2, L2, L2, L2]
+    call 1 ;; 関数1を呼び出す [L2, L2, L2, L2]
+    local.set 6 ;; スタックの値をローカル変数6に保存 [L2, L2, L2] L6=関数1の返り値
+    local.get 2 ;; ローカル変数2をスタックにプッシュ [L2, L2, L2, L2]
+    local.get 6 ;; ローカル変数6をスタックにプッシュ [L6(関数1の返り値), L2, L2, L2, L2]
+    i32.store offset=4 ;; スタックの先頭の値をポップして4番地に書く [L2, L2, L2, L2] [4]=関数1の返り値
+    local.get 2 ;; ローカル変数2をスタックにプッシュ [L2, L2, L2, L2, L2]
+    i32.load offset=4 ;; 4番地をスタックにプッシュ [関数1の返り値, L2, L2, L2, L2, L2]
+    local.set 7 ;; スタックの値をローカル変数7に保存 [L2, L2, L2, L2] L7=関数1の返り値
+    local.get 7 ;; ローカル変数7をスタックにプッシュ [L7(関数1の返り値), L2, L2, L2, L2]
+    call 2 ;; 関数2を呼び出す [L2, L2, L2, L2]
+    local.set 8 ;; スタックの値をローカル変数8に保存 [L2, L2, L2] L8=関数2の返り値
+    local.get 2 ;; ローカル変数2をスタックにプッシュ [L2, L2, L2, L2]
+    local.get 8 ;; ローカル変数8をスタックにプッシュ [L8(関数2の返り値), L2, L2, L2, L2]
+    i32.store ;; スタックの先頭の値をポップして0番地に置く [L2, L2, L2] [0]=L8(関数2の返り値)
+    local.get 2 ;; ローカル変数2をスタックにプッシュ [L2, L2, L2, L2]
+    i32.load ;; 0番地をスタックにプッシュ [L8(関数2の返り値), L2, L2, L2, L2]
+    local.set 9 ;; スタックの値をローカル変数9に保存 [L2, L2, L2] L9=関数2の返り値
+    i32.const 16 ;; 16をスタックにプッシュ [16, L2, L2, L2]
+    local.set 10 ;; スタックの値をローカル変数10に保存 [L2, L2, L2] L10=16
+    local.get 2 ;; ローカル変数2をスタックにプッシュ [L2, L2, L2, L2]
+    local.get 10 ;; ローカル変数10をスタックにプッシュ [L10(16), L2, L2, L2, L2]
+    i32.add ;; L2+L10(16) [L2+L10(16), L2, L2, L2, L2]
+    local.set 11 ;; スタックの値をローカル変数11に保存 [L2, L2, L2] L11=L2+L10(16)
+    local.get 11 ;; ローカル変数11をスタックにプッシュ [L11(L2+L10(16)), L2, L2, L2]
+    global.set 0 ;; スタックの値をポップしてグローバル変数0に保存 [L2, L2, L2] g0=L11(L2+L10(16))
+    local.get 9 ;; ローカル変数9をスタックにプッシュ [L9(関数2の返り値), L2, L2, L2]
     return)
   (func (;4;) (type 4) (param i32 i32) (result i32)
     (local i32)
