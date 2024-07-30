@@ -23,7 +23,7 @@ int reverseNumber(int n) {
 }
 
 int main() {
-    int n = 1000000;
+    int n = 10;
     int result1 = fibonacci(n);
     int result2 = reverseNumber(result1);
     
