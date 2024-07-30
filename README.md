@@ -3,7 +3,7 @@ cd ~/emsdk
 
 source ./emsdk_env.sh
 
-emcc target.c -o
+emcc target.c -o index.html -O0
 
 最適化レベルの調整
 The levels include: -O0 (no optimization), -O1, 
