@@ -10,7 +10,7 @@ The levels include: -O0 (no optimization), -O1,
 -O2, -Os, -Oz, -Og, and -O3.
 
 ## WABTの利用
-cd ~/wabt
+cd ~/wab
 
 bin/wasm2wat ~/wasm/research/file_name.wasm -o file_name.wat
 ## 補足
