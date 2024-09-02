@@ -27,7 +27,7 @@ int main() {
     int result1;
     int result2;
     for (int i = 0; i < 4096; i++) {
-      result1 = fibonacci(n);
+      result1 = fibonacci(i % 46);
     }
     result2 = reverseNumber(result1);
     return result2;
